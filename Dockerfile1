@@ -11,7 +11,7 @@ RUN wget "https://tencentcloud-otel-java-agent-gz-1258344699.cos.ap-guangzhou.my
 
 ENV token=WbhGhDwwjFipHambONmC
 ENV endpoint="http://ap-guangzhou.apm.tencentcs.com:4317"
-ENV appName=testserver123
+ENV appName=testserver1234
 ENV JAVA_TOOL_OPTIONS ${JAVA_TOOL_OPTIONS} '-javaagent:/app/opentelemetry-javaagent.jar -Dotel.resource.attributes=service.name='${appName}',token='${token}' -Dotel.exporter.otlp.endpoint='${endpoint}
 RUN env | grep JAVA_TOOL_OPTIONS
 
