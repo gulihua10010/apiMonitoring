@@ -11,10 +11,10 @@ RUN wget "https://tencentcloud-otel-java-agent-gz-1258344699.cos.ap-guangzhou.my
 
 ENV token=WbhGhDwwjFipHambONmC
 ENV endpoint="http://ap-guangzhou.apm.tencentcs.com:4317"
-ENV appName=testserver12
-ENV JAVA_OPTIONS="$JAVA_OPTIONS -javaagent:/app/opentelemetry-javaagent.jar"
-ENV OTEL_RESOURCE_ATTRIBUTES='service.name=${appName},token=${token}'
-ENV OTEL_EXPORTER_OTLP_ENDPOINT=${endpoint}
+ENV appName=testserver123
+ENV JAVA_TOOL_OPTIONS ${JAVA_TOOL_OPTIONS} '-javaagent:/app/opentelemetry-javaagent.jar -Dotel.resource.attributes=service.name='${appName}',token='${token}' -Dotel.exporter.otlp.endpoint='${endpoint}
+### 检查JAVA_TOOL_OPTIONS环境变量。
+RUN env | grep JAVA_TOOL_OPTIONS
 
 
 # Build a release artifact.
