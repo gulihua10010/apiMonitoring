@@ -12,13 +12,11 @@ RUN wget "https://tencentcloud-otel-java-agent-gz-1258344699.cos.ap-guangzhou.my
 ENV token=WbhGhDwwjFipHambONmC
 ENV endpoint="http://ap-guangzhou.apm.tencentcs.com:4317"
 ENV appName=testserver123
-ENV JAVA_TOOL_OPTIONS ${JAVA_TOOL_OPTIONS} '-javaagent:/app/opentelemetry-javaagent.jar -Dotel.resource.attributes=service.name='${appName}',token='${token}' -Dotel.exporter.otlp.endpoint='${endpoint}
-### 检查JAVA_TOOL_OPTIONS环境变量。
-RUN env | grep JAVA_TOOL_OPTIONS
+
 
 
 # Build a release artifact.
 RUN mvn package -DskipTests
 
 # Run the web service on container startup.
-CMD ["java","-jar","/app/target/springboot-1.0-SNAPSHOT.jar"]
+CMD ["java","-javaagent:/app/opentelemetry-javaagent.jar","-Dotel.resource.attributes=service.name=${appName},token=${token}", "-Dotel.exporter.otlp.endpoint=${endpoint}", "-jar","/app/target/springboot-1.0-SNAPSHOT.jar"]
