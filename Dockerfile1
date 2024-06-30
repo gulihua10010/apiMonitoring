@@ -10,9 +10,8 @@ COPY src ./src
 RUN wget "https://tencentcloud-otel-java-agent-gz-1258344699.cos.ap-guangzhou.myqcloud.com/1.16-20240328/opentelemetry-javaagent.jar" -O opentelemetry-javaagent.jar
 
 ENV token=WbhGhDwwjFipHambONmC
-ENV appName=testserver1234
-ENV OTEL_RESOURCE_ATTRIBUTES="service.name=${appName},token=${token}"
-ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://ap-guangzhou.apm.tencentcs.com:4317"
+ENV endpoint="http://ap-guangzhou.apm.tencentcs.com:4317"
+ENV appName=testserver123
 
 
 
@@ -20,4 +19,4 @@ ENV OTEL_EXPORTER_OTLP_ENDPOINT="http://ap-guangzhou.apm.tencentcs.com:4317"
 RUN mvn package -DskipTests
 
 # Run the web service on container startup.
-CMD ["java","-javaagent:/app/opentelemetry-javaagent.jar", "-jar","/app/target/springboot-1.0-SNAPSHOT.jar"]
+CMD ["java","-javaagent:/app/opentelemetry-javaagent.jar","-Dotel.resource.attributes=service.name=testserver123,token=WbhGhDwwjFipHambONmC", "-Dotel.exporter.otlp.endpoint=http://ap-guangzhou.apm.tencentcs.com:4317", "-jar","/app/target/springboot-1.0-SNAPSHOT.jar"]
