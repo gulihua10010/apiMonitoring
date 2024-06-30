@@ -16,8 +16,6 @@ ENV CATALINA_OPTS="$CATALINA_OPTS -javaagent:/app/opentelemetry-javaagent.jar"
 ENV OTEL_RESOURCE_ATTRIBUTES='service.name=${appName},token=${token}'
 ENV OTEL_EXPORTER_OTLP_ENDPOINT=${endpoint}
 
-### 检查JAVA_TOOL_OPTIONS环境变量。
-RUN env | grep JAVA_TOOL_OPTIONS
 
 # Build a release artifact.
 RUN mvn package -DskipTests
