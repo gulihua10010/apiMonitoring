@@ -9,12 +9,6 @@ COPY pom.xml .
 COPY src ./src
 RUN wget "https://tencentcloud-otel-java-agent-gz-1258344699.cos.ap-guangzhou.myqcloud.com/1.16-20240328/opentelemetry-javaagent.jar" -O opentelemetry-javaagent.jar
 
-ENV token=WbhGhDwwjFipHambONmC
-ENV endpoint="http://ap-guangzhou.apm.tencentcs.com:4317"
-ENV appName=testserver123
-
-
-
 # Build a release artifact.
 RUN mvn package -DskipTests
 
