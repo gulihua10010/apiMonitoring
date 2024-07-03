@@ -1,4 +1,4 @@
-FROM maven:3.8.1-jdk-8-slim as builder
+FROM maven:3.8.1-jdk-8  as builder
 
 # 解决容器时期与真实时间相差 8 小时的问题
 RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone
